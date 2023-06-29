@@ -22,7 +22,7 @@ This action assigns milestones to pull-requests based on labels
 
 ### `fallback`
 
-**Optional** List of pull-request labels to match for targeting a major milestone.
+**Optional** Fallback target to use if none of the above matches *or* if the milestone is not found.
 
 ## Outputs
 
