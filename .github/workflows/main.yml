@@ -1,0 +1,21 @@
+on:
+  pull_request:
+    types:
+      - closed
+
+jobs:
+  milestone_job:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    name: A job to assign milestones to PRs
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Assign milestone to PR
+        uses: ./ # Uses an action in the root directory
+        id: assign-milestone
+        with:
+          fallback: 'minor'
+      # Use the output from the `hello` step
+      - name: Show milestone
+        run: echo "The milestone was set to ${{ steps.assign-milestone.outputs.milestone }}"
