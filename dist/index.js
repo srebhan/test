@@ -9812,7 +9812,7 @@ async function run() {
         }
 
         // Check the config options
-        if (fallback !== undefined && not['', 'bugfix', 'minor', 'major'].includes(fallback)) {
+        if (fallback !== undefined && !['', 'bugfix', 'minor', 'major'].includes(fallback)) {
             core.setFailed('Invalid "fallback"; has to be "bugfix", "minor", "major" or unset!');
         }
 
