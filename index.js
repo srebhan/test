@@ -47,6 +47,7 @@ async function run() {
         } else if (labels.some(l => major.includes(l))) {
             target = "major";
         } else if (fallback !== undefined && fallback !== '') {
+            core.info(`Falling back to ${fallback}...`);
             target = fallback;
         }
         core.debug(`Targeting milestone ${target}`);
@@ -80,9 +81,9 @@ async function run() {
 
         var match = milestones.data.filter(m => m.title == version && m.state == 'open')
         if (match.length == 0 && fallback !== undefined && fallback !== '') {
-            version = bumpVersion(latest, fallback)
             core.info(`Checking fallback version...`);
-            match = milestones.data.filter(m => m.title == fallback_version_version && m.state == 'open')
+            version = bumpVersion(latest, fallback)
+            match = milestones.data.filter(m => m.title == version && m.state == 'open')
         }
 
         // Check again to also take the fallback into account
