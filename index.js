@@ -48,7 +48,7 @@ async function run() {
         const octokit = github.getOctokit(token);
 
         // Get the latest release and bump the version
-        const latest = octokit.rest.repos.getLatestRelease(context.repo)
+        const latest = octokit.rest.repos.getLatestRelease(...context.repo)
         core.debug(`latest release: ${latest}`);
         if (latest == '') {
             core.info(`No release found...`);
@@ -59,11 +59,10 @@ async function run() {
 
         // Try to get the milestones and check if we have the correct one
         const milestones = octokit.rest.issues.listMilestones({
-            owner: context.owner,
-            repo: context.repo,
+            ...context.repo,
             state: 'open',
         })
-        const mslist = JSON.stringify(github.context.payload, undefined, 2)
+        const mslist = JSON.stringify(milestones, undefined, 2)
 
         core.debug(`Milestones: ${mslist}`)
 
