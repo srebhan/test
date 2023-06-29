@@ -20,6 +20,10 @@ This action assigns milestones to pull-requests based on labels
 
 **Optional** List of pull-request labels to match for targeting a major milestone.
 
+### `fallback`
+
+**Optional** List of pull-request labels to match for targeting a major milestone.
+
 ## Outputs
 
 ### `milestone`
