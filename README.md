@@ -8,6 +8,10 @@ This action assigns milestones to pull-requests based on labels
 
 **Required** The GITHUB_ACTION token.
 
+### `bugfix-tags`
+
+**Optional** List of pull-request labels to match for targeting a bugfix milestone.
+
 ## Outputs
 
 ### `milestone`
