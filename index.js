@@ -52,9 +52,11 @@ async function run() {
         const octokit = github.getOctokit(token);
 
         // Get the latest release and bump the version
-        const latest = await(octokit.rest.repos.getLatestRelease(context.repo))
-        const l = JSON.stringify(latest, undefined, 2)
-        core.debug(`latest release: ${l}`);
+        const latest_response = await (octokit.rest.repos.getLatestRelease(context.repo))
+        const l = JSON.stringify(latest_response.data, undefined, 2)
+        const latest = latest_response.data.name
+        core.debug(`latest release: ${latest}`);
+        core.debug(l)
         if (latest == '') {
             core.info(`No release found...`);
             core.setOutput('milestone', '-');
