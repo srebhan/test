@@ -9812,13 +9812,13 @@ async function run() {
             core.setOutput('milestone', '-');
             return;
         }
-        if (context.payload.pull_request.milestone) {
+        const pull_request = context.payload.pull_request
+        if (pull_request.milestone) {
             const out = JSON.stringify(context.payload.pull_request, undefined, 2)
-            core.info(`Pull-request already has a milestone: ${out}`);
-            core.setOutput('milestone', context.payload.pull_request.title);
+            core.info(`Pull-request already has milestone: ${pull_request.milestone.title}`);
+            core.setOutput('milestone', '-');
             return;
         }
-        const pull_request = context.payload.pull_request
 
         // Check the config options
         core.debug(`Checking fallback...`);
