@@ -63,20 +63,20 @@ async function run() {
         var version = bumpVersion(latest, target);
 
         // Try to get the milestones and check if we have the correct one
-        const milestones = await(octokit.rest.issues.listMilestones(context.repo)).data
-        if (milestones.length < 1) {
+        const milestones = await(octokit.rest.issues.listMilestones(context.repo))
+        const mslist = JSON.stringify(milestones.data, undefined, 2)
+        core.debug(`Milestones: ${mslist}`)
+        if (milestones.data.length < 1) {
             core.info(`No milestones in project...`);
             core.setOutput('milestone', '-');
             return;
         }
-        const mslist = JSON.stringify(milestones, undefined, 2)
-        core.debug(`Milestones: ${mslist}`)
 
-        var match = milestones.filter(m => m.title == version && m.state == 'open')
+        var match = milestones.data.filter(m => m.title == version && m.state == 'open')
         if (match.length == 0 && fallback !== undefined && fallback !== '') {
             version = bumpVersion(latest, fallback)
             core.info(`Checking fallback version...`);
-            match = milestones.filter(m => m.title == fallback_version_version && m.state == 'open')
+            match = milestones.data.filter(m => m.title == fallback_version_version && m.state == 'open')
         }
 
         // Check again to also take the fallback into account
