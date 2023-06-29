@@ -13,13 +13,21 @@ async function run() {
 
         const context = github.context;
 
-        // Get the pull-request event information
+        // Check the pull-request event information
         core.debug(`Checking for pull-request...`);
         if (!context.payload.pull_request) {
-            core.debug(`Not a pull-request event: ${context}`);
+            const out = JSON.stringify(context.payload, undefined, 2)
+            core.debug(`Not a pull-request event: ${out}`);
             core.setOutput('milestone', '-');
             return;
         }
+        if (context.payload.pull_request.milestone) {
+            const out = JSON.stringify(context.payload.pull_request, undefined, 2)
+            core.info(`Pull-request already has a milestone: ${out}`);
+            core.setOutput('milestone', context.payload.pull_request.title);
+            return;
+        }
+        const pull_request = context.payload.pull_request
 
         // Check the config options
         core.debug(`Checking fallback...`);
@@ -29,7 +37,7 @@ async function run() {
         }
 
         // Determine the target version
-        const labels = context.payload.pull_request.labels.map(x => x.name);
+        const labels = pull_request.labels.map(x => x.name);
         core.debug(`Determining target milestone for labels [${labels}]...`);
         let target;
         if (labels.some(l => bugfix.includes(l))) {
@@ -64,8 +72,6 @@ async function run() {
 
         // Try to get the milestones and check if we have the correct one
         const milestones = await(octokit.rest.issues.listMilestones(context.repo))
-        const mslist = JSON.stringify(milestones.data, undefined, 2)
-        core.debug(`Milestones: ${mslist}`)
         if (milestones.data.length < 1) {
             core.info(`No milestones in project...`);
             core.setOutput('milestone', '-');
@@ -92,7 +98,11 @@ async function run() {
 
         // Set the milestone
         const milestone = match[0]
-
+        octokit.rest.issues.update({
+            ...context.repo,
+            issue_number: pull_request.number,
+            milestone: milestone.number
+        })
         core.setOutput('milestone', milestone.title);
     } catch (error) {
         core.error(error)
