@@ -4,9 +4,9 @@ This action assigns milestones to pull-requests based on labels
 
 ## Inputs
 
-### `abc`
+### `repo-token`
 
-**Required** The name of the person to greet. Default `"World"`.
+**Required** The GITHUB_ACTION token.
 
 ## Outputs
 
