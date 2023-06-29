@@ -53,28 +53,47 @@ async function run() {
 
         // Get the latest release and bump the version
         const latest_response = await (octokit.rest.repos.getLatestRelease(context.repo))
-        const l = JSON.stringify(latest_response.data, undefined, 2)
         const latest = latest_response.data.name
         core.debug(`latest release: ${latest}`);
-        core.debug(l)
         if (latest == '') {
             core.info(`No release found...`);
             core.setOutput('milestone', '-');
             return;
         }
-        const version = await(bumpVersion(latest, target));
+        var version = bumpVersion(latest, target);
 
         // Try to get the milestones and check if we have the correct one
-        const milestones = octokit.rest.issues.listMilestones({
-            ...context.repo,
-            state: 'open',
-        })
+        const milestones = await (octokit.rest.issues.listMilestones(context.repo))
+        if (milestones.length < 1) {
+            core.info(`No milestones in project...`);
+            core.setOutput('milestone', '-');
+            return;
+        }
         const mslist = JSON.stringify(milestones, undefined, 2)
-
         core.debug(`Milestones: ${mslist}`)
 
-        let milestone = ""
-        core.setOutput('milestone', version);
+        var match = milestones.filter(m => m.title == version && m.state == 'open')
+        if (match.length == 0 && fallback !== undefined && fallback !== '') {
+            version = bumpVersion(latest, fallback)
+            core.info(`Checking fallback version...`);
+            match = milestones.filter(m => m.title == fallback_version_version && m.state == 'open')
+        }
+
+        // Check again to also take the fallback into account
+        if (match.length == 0) {
+            core.info(`No milestone matching ${version} found in project...`);
+            core.setOutput('milestone', '-');
+            return;
+        }
+
+        if (match.length > 1) {
+            core.setFailed(`Ambiguous milestones for ` + version);
+        }
+
+        // Set the milestone
+        const milestone = match[0]
+
+        core.setOutput('milestone', milestone.title);
     } catch (error) {
         core.error(error)
         core.setFailed(error.message);
