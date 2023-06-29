@@ -9843,7 +9843,7 @@ async function run() {
         const octokit = github.getOctokit(token);
 
         // Get the latest release and bump the version
-        const latest = await(octokit.rest.repos.getLatestRelease(context.repo))
+        const latest = await(octokit.rest.repos.getLatestRelease(context.repo)).name
         core.debug(`latest release: ${latest}`);
         if (latest == '') {
             core.info(`No release found...`);
