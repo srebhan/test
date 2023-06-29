@@ -9821,7 +9821,7 @@ async function run() {
 
         // Determine the target version
         const labels = context.payload.pull_request.labels;
-        core.debug(`Determining target milestone for labels ${labels}...`);
+        core.debug(`Determining target milestone for labels ${labels[0]}...`);
         let target;
         if (labels.some(l => bugfix.includes(l))) {
             target = "bugfix";
