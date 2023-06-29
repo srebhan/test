@@ -6,7 +6,7 @@ This action assigns milestones to pull-requests based on labels
 
 ## Inputs
 
-### `tbd`
+### `abc`
 
 **Required** The name of the person to greet. Default `"World"`.
 
