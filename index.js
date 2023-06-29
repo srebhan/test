@@ -53,7 +53,8 @@ async function run() {
 
         // Get the latest release and bump the version
         const latest = octokit.rest.repos.getLatestRelease(context.repo)
-        core.debug(`latest release: ${latest}`);
+        const lateststr  = JSON.stringify(latest, undefined, 2)
+        core.debug(`latest release: ${lateststr}`);
         if (latest == '') {
             core.info(`No release found...`);
             core.setOutput('milestone', '-');
@@ -78,7 +79,7 @@ async function run() {
     }
 }
 
-async function bumpVersion(before, target) {
+function bumpVersion(before, target) {
     const version = before.replace(/^v/, '').split('.').map(x => parseInt(x, 10));
 
     switch (target) {
