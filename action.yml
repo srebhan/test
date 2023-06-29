@@ -1,6 +1,9 @@
 name: 'Hello World'
 description: 'Greet someone and record the time'
 inputs:
+  repo-token:
+    description: 'The GITHUB_TOKEN token'
+    required: true
   bugfix-tags:
     description: 'Comma-separated list of tags indicating a bug-fix. If any of those match the PR is tags with the bug-fix milestone'
     required: false
