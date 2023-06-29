@@ -14,6 +14,7 @@ async function run() {
         const context = github.context;
 
         // Get the pull-request event information
+        core.debug(`Checking for pull-request...`);
         if (!context.payload.pull_request) {
             core.debug(`Not a pull-request event: ${context}`);
             core.setOutput('milestone', '-');
@@ -21,12 +22,15 @@ async function run() {
         }
 
         // Check the config options
-        if (fallback !== undefined && !['', 'bugfix', 'minor', 'major'].includes(fallback)) {
+        core.debug(`Checking fallback...`);
+        const valid_fallbacks = ['', 'bugfix', 'minor', 'major']
+        if (fallback !== undefined && !valid_fallbacks.includes(fallback)) {
             core.setFailed('Invalid "fallback"; has to be "bugfix", "minor", "major" or unset!');
         }
 
         // Determine the target version
         const labels = context.payload.pull_request.labels;
+        core.debug(`Determining target milestone for labels ${labels}...`);
         let target;
         if (labels.some(l => bugfix.includes(l))) {
             target = "bugfix";
@@ -69,6 +73,7 @@ async function run() {
         let milestone = ""
         core.setOutput('milestone', version);
     } catch (error) {
+        core.error(error)
         core.setFailed(error.message);
     }
 }
