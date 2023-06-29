@@ -30,7 +30,8 @@ async function run() {
 
         // Determine the target version
         const labels = context.payload.pull_request.labels;
-        core.debug(`Determining target milestone for labels ${labels[0]}...`);
+        const labelstr  = JSON.stringify(labels, undefined, 2)
+        core.debug(`Determining target milestone for labels ${labelstr}...`);
         let target;
         if (labels.some(l => bugfix.includes(l))) {
             target = "bugfix";
@@ -53,8 +54,7 @@ async function run() {
 
         // Get the latest release and bump the version
         const latest = octokit.rest.repos.getLatestRelease(context.repo)
-        const lateststr  = JSON.stringify(latest, undefined, 2)
-        core.debug(`latest release: ${lateststr}`);
+        core.debug(`latest release: ${latest}`);
         if (latest == '') {
             core.info(`No release found...`);
             core.setOutput('milestone', '-');
