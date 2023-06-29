@@ -12,6 +12,10 @@ This action assigns milestones to pull-requests based on labels
 
 **Optional** List of pull-request labels to match for targeting a bugfix milestone.
 
+### `minor-tags`
+
+**Optional** List of pull-request labels to match for targeting a bugfix milestone.
+
 ## Outputs
 
 ### `milestone`
