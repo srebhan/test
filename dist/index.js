@@ -9802,7 +9802,7 @@ async function run() {
 
         // Get the JSON webhook payload for the event that triggered the workflow
         const ctx = JSON.stringify(github.context.payload, undefined, 2)
-        ccore.debug(`The event context: ${ctx}`);
+        core.debug(`The event context: ${ctx}`);
         const payload = JSON.stringify(github.context.payload, undefined, 2)
         core.debug(`The event payload: ${payload}`);
 
