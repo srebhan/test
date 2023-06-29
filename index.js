@@ -63,7 +63,7 @@ async function run() {
         var version = bumpVersion(latest, target);
 
         // Try to get the milestones and check if we have the correct one
-        const milestones = await (octokit.rest.issues.listMilestones(context.repo))
+        const milestones = await(octokit.rest.issues.listMilestones(context.repo)).data
         if (milestones.length < 1) {
             core.info(`No milestones in project...`);
             core.setOutput('milestone', '-');
