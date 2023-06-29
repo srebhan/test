@@ -20,3 +20,5 @@ A description
 
 ```yaml
 uses: actions/label-milestone-action@v1.0.0
+
+test
