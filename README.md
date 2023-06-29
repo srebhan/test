@@ -28,7 +28,7 @@ This action assigns milestones to pull-requests based on labels
 
 ### `milestone`
 
-A description
+The milestone assigned to the pull request or `-` if none could be found.
 
 ## Example usage
 
