@@ -51,8 +51,3 @@ uses: actions/label-milestone-action@v1.0.0
 with:
   repo-token: ${{ secrets.GITHUB_TOKEN }}
 ```
-
-## Description
-
-lala
-s
