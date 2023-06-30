@@ -2,6 +2,15 @@
 
 This action assigns milestones to pull-requests based on labels.
 
+## Assumptions
+
+This action assumes that you 
+1. want to assign the milestones to represent future releases
+2. you release the software on Github in a linear fashion, i.e. the 
+   last released version is always the basis for determining the milestone
+3. you use [semantic versioning](https://semver.org/)
+4. your milestone titles are just the version e.g. `v1.2.3`
+
 ## Inputs
 
 ### `repo-token`
