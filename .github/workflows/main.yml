@@ -18,4 +18,4 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           fallback: 'minor'
       - name: Show milestone
-        run: echo "The milestone was set to ${{ steps.assign-milestone.outputs.milestone }}"
+        run: echo "Assigned milestone is ${{ steps.assign-milestone.outputs.milestone }}"

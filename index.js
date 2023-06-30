@@ -79,7 +79,7 @@ async function run() {
             }
         ))
         const milestone_titles = milestones.data.map(m => m.title)
-        core.debug(`Got milestones: [${milestone_titles}`);
+        core.debug(`Got milestones: [${milestone_titles}]`);
 
         if (milestones.data.length < 1) {
             core.info(`No milestones in project...`);
