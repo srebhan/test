@@ -10,6 +10,7 @@ This action assumes that you
    last released version is always the basis for determining the milestone
 3. you use [semantic versioning](https://semver.org/)
 4. your milestone titles are just the version e.g. `v1.2.3`
+5. the milestones you want to assign already exist
 
 ## Inputs
 
