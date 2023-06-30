@@ -20,18 +20,21 @@ This action assumes that you
 
 ### `bugfix-tags` (*optional*)
 
-Comma-separated list of pull-request labels to match for targeting a bugfix milestone.
-By *default* this is set to `bug,documentation`.
+Comma-separated list of pull-request labels to match for targeting a *bugfix milestone*.
+By *default* this option is set to `bug,documentation`.
 
 ### `minor-tags` (*optional*)
 
-List of pull-request labels to match for targeting a minor milestone.
+Comma-separated list of pull-request labels to match for targeting a *minor milestone*.
+By *default* this option is not set, so no pull-requests are explicitly assigned to
+minor milestones. You might use minor milestones as fallback for pull-requests *not*
+explicitly assigned. Please see the [`fallback` option](#fallback-optional) for details.
 
 ### `major-tags`
 
 **Optional** List of pull-request labels to match for targeting a major milestone.
 
-### `fallback`
+### `fallback` (*optional*)
 
 **Optional** Fallback target to use if none of the above matches *or* if the milestone is not found.
 
