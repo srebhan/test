@@ -18,13 +18,14 @@ This action assumes that you
 
 **Required** The GITHUB_ACTION token.
 
-### `bugfix-tags`
+### `bugfix-tags` (*optional*)
 
-**Optional** List of pull-request labels to match for targeting a bugfix milestone.
+Comma-separated list of pull-request labels to match for targeting a bugfix milestone.
+By *default* this is set to `bug,documentation`.
 
-### `minor-tags`
+### `minor-tags` (*optional*)
 
-**Optional** List of pull-request labels to match for targeting a minor milestone.
+List of pull-request labels to match for targeting a minor milestone.
 
 ### `major-tags`
 
