@@ -7,11 +7,11 @@ inputs:
   bugfix-tags:
     description: 'Comma-separated list of tags indicating a bug-fix. If any of those match the PR is tags with the bug-fix milestone'
     required: false
-    default: 'fix,chore,docs'
+    default: 'bug,documentation'
   minor-tags:
     description: 'Comma-separated list of tags indicating a minor version PR'
     required: false
-    default: 'feat'
+    default: ''
   major-tags:
     description: 'Comma-separated list of tags indicating a major version PR'
     required: false
