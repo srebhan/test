@@ -63,7 +63,7 @@ async function run() {
         // Get the latest release and bump the version
         const latest_response = await (octokit.rest.repos.getLatestRelease(context.repo))
         const latest = latest_response.data.name
-        core.debug(`latest release: ${latest}`);
+        core.debug(`Latest release: ${latest}`);
         if (latest == '') {
             core.info(`No release found...`);
             core.setOutput('milestone', '-');
@@ -78,6 +78,8 @@ async function run() {
                 state: "open"
             }
         ))
+        const milestone_titles = milestones.data.map(m => m.title)
+        core.debug(`Got milestones: [${milestone_titles}`);
 
         if (milestones.data.length < 1) {
             core.info(`No milestones in project...`);
