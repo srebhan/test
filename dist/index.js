@@ -9844,7 +9844,10 @@ async function run() {
         core.debug(`Targeting milestone ${target}`);
 
         if (target === undefined) {
-            core.debug(`Non of the labels match: ${labels}`);
+            core.debug(`Non of the labels match pull-request: ${labels}`);
+            core.debug(`    bugfix labels: ${bugfix}`);
+            core.debug(`    minor labels:  ${minor}`);
+            core.debug(`    major labels:  ${major}`);
             core.setOutput('milestone', '-');
             return;
         }
