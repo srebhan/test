@@ -9,6 +9,8 @@ jobs:
     runs-on: ubuntu-latest
     name: A job to assign milestones to PRs
     steps:
+      - name: Checkout
+        uses: actions/checkout@v3
       - name: Assign milestone to PR
         uses: ./
         id: assign-milestone
